@@ -19,6 +19,13 @@
     font-size: 40px;
 }
 
+@mixin font-karma-auth-subHeading-bold-400 {
+    font-family: "karma-regular";
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 20.34px;
+}
+
 @mixin font-kaisei-harunoUmi-bold-700 {
     font-family: "kaisei-harunoUmi-regular";
     font-weight: 700;

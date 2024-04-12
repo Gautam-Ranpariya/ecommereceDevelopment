@@ -48,7 +48,7 @@ export default function Login() {
                     </div>
                     <div className='vector'></div>
                   </div>
-                  <div className='signInOptionPart'>
+                  <div className='loginSocialMediaPart'>
                     <SocialMediaButton img={facebookIcon} alt="facebook Icon" />
                     <SocialMediaButton img={googleIcon} alt="google Icon" />
                     <SocialMediaButton img={linkedInIcon} alt="linkedIn Icon" />
