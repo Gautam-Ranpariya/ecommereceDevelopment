@@ -16,7 +16,7 @@ const alreadyuser  = async (req,res)=>{
     try {
         let {email} =  req.body
 
-    let user = await userModel.find({email:email})
+    let user = await userModel.findOne({email:email})
     console.log(user);
     if (user) {
        return res.status(200).json({

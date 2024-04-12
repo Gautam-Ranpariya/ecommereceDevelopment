@@ -10,7 +10,7 @@ import SocialMediaButton from '../../shared/components/socialMediaButton';
 import facebookIcon from '../../assets/icons/facebook.svg';
 import googleIcon from '../../assets/icons/google.svg';
 import linkedInIcon from '../../assets/icons/linkedIn.svg';
-import authLogin from '../../assets/images/auth-login.png';
+import authSignUp from '../../assets/images/auth-signUp.png';
 import UserInputConformPassword from '../../shared/components/userInputConformPassword';
 
 export default function SignUp() {
@@ -19,19 +19,19 @@ export default function SignUp() {
   return (
     <>
       <div>
-        <div className="mainLogin">
+        <div className="mainSignUp">
           <div className="vectorTop"></div>
           <div className="vectorBottom"></div>
           <div className="container">
-            <div className="innerLogin">
+            <div className="innerSignUp">
               <div className="imagePart">
                 <img src={AuthDesktop} alt="authDesktopImage" className='auth' />
-                <img src={authLogin} alt="auth-login" className='auth-login' />
+                <img src={authSignUp} alt="auth-signUp" className='auth-signUp' />
               </div>
-              <div className="loginPart">
-                <div className="loginForm">
-                  <div className="loginHeadingPart">
-                    <p className='loginHeading'>Sign Up</p>
+              <div className="signUpPart">
+                <div className="signUpForm">
+                  <div className="signUpHeadingPart">
+                    <p className='signUpHeading'>Sign Up</p>
                   </div>
                   <UserInputEmail name="password" placeholder="Enter Your Email" />
                   <UserInputPassword name="password" placeholder="Enter Your Password" />
@@ -40,17 +40,17 @@ export default function SignUp() {
                   <div className="signInWithPart">
                     <div className='vector'></div>
                     <div className='otherOption'>
-                      <p className='signInOption'>Or Sign Up With</p>
+                      <p className='signUpOption'>Or Sign Up With</p>
                     </div>
                     <div className='vector'></div>
                   </div>
-                  <div className='signInOptionPart'>
+                  <div className='signUpSocialMediaPart'>
                     <SocialMediaButton img={facebookIcon} alt="facebook Icon" />
                     <SocialMediaButton img={googleIcon} alt="google Icon" />
                     <SocialMediaButton img={linkedInIcon} alt="linkedIn Icon" />
                   </div>
-                  <div className="signupOptionPart">
-                    <p className='signupDescription'>Alreay have an accout? <Link to={'/login'} className='signupLink'>Sing In</Link></p>
+                  <div className="accountOptionPart">
+                    <p className='accountDescription'>Alreay have an accout? <Link to={'/login'} className='signUpLink'>Sing In</Link></p>
                   </div>
                 </div>
               </div>
