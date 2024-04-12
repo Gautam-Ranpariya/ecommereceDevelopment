@@ -1,15 +1,5 @@
 @import '../../../styles/global.scss';
 
-$base : 0px;
-$xsss : 375px;
-$xss : 540px;
-$xs : 640px;
-$sm : 768px;
-$md : 992px;
-$lg : 1024px;
-$xl : 1280px;
-$xll: 1440px;
-
 
 .moderateButtonMain
 {
@@ -25,17 +15,14 @@ $xll: 1440px;
         padding: 12px 15px;
         text-align: center;
         @include font-kaisei-harunoUmi-bold-700;
+        cursor: pointer;
 
         
-    @media screen and (max-width: $sm) {
+    @include breakpoint ("max-md") {
         padding: 10px;
-        font-size: 15px; 
-    }
-
-    @media screen and (max-width: $xs) {
-        padding: 8px 15px;
-        font-size: 16px;
-        line-height: 23.92px;
+        font-size: 18px; 
+        font-weight: 500;
+        line-height: 26.06px;
     }
 
     }

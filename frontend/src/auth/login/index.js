@@ -33,8 +33,8 @@ export default function Login() {
                     <p className='loginHeading'>Login</p>
                     <p className='headingDescription'>Login to your account to continue</p>
                   </div>
-                  <UserInputEmail />
-                  <UserInputPassword />
+                  <UserInputEmail name="password" placeholder="Enter Your Email" />
+                  <UserInputPassword name="password" placeholder="Enter Your Password" />
                   <div className="forgotPasswordPart">
                     <p className='forgotPassword'>
                       <Link to={'/forgotPassword'} className='forgot'>Forgot password?</Link>
