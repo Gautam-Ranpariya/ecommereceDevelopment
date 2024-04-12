@@ -1,0 +1,42 @@
+@import '../../../styles/global.scss';
+
+$base : 0px;
+$xsss : 375px;
+$xss : 540px;
+$xs : 640px;
+$sm : 768px;
+$md : 992px;
+$lg : 1024px;
+$xl : 1280px;
+$xll: 1440px;
+
+
+.moderateButtonMain
+{
+    width: 100%;
+    
+    .moderateBtn {
+        width: 100%;
+        background-color: var(--theme-auth-button-bg-moderate);
+        border-radius: 30px;
+        outline: none;
+        border: none;
+        color: var(--theme-auth-moderate-button-text);
+        padding: 12px 15px;
+        text-align: center;
+        @include font-kaisei-harunoUmi-bold-700;
+
+        
+    @media screen and (max-width: $sm) {
+        padding: 10px;
+        font-size: 15px; 
+    }
+
+    @media screen and (max-width: $xs) {
+        padding: 8px 15px;
+        font-size: 16px;
+        line-height: 23.92px;
+    }
+
+    }
+}

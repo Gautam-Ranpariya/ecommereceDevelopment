@@ -1,5 +1,5 @@
 import React from 'react';
-import './VerificationCode.scss';
+import './verificationCode.scss';
 
 export default function VerificationCode() {
   return (

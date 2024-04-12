@@ -1,0 +1,57 @@
+@import '../../../styles/global.scss';
+
+$base : 0px;
+$xsss : 375px;
+$xss : 540px;
+$xs : 640px;
+$sm : 768px;
+$md : 992px;
+$lg : 1024px;
+$xl : 1280px;
+$xll: 1440px;
+
+
+
+.socialMediaButtons
+{
+    width: 100%;
+
+    .socialMediaBtn
+    {
+        width: 38px;
+        height: 38px;
+        border-radius: 50%;
+        background-color: var(--theme-auth-button-bg-moderate);
+        border: none;
+        outline: none;
+        @include flex-centers;
+        cursor: pointer;
+
+        @media screen and (max-width: $sm) {
+            width: 30px;
+            height: 30px;
+        }
+
+        @media screen and (max-width: $xs) {
+            width: 38px;
+            height: 38px;
+        }
+        
+        .icons
+        {
+            width: 18px;
+            color: var(--theme-auth-social-button-text);
+            height: 18px;
+
+            @media screen and (max-width: $sm) {
+                width : 15px;
+                height: 15px;
+            }
+
+            @media screen and (max-width: $xs) {
+                width: 24px;
+                height: 24px;
+            }
+        }
+    }
+}
