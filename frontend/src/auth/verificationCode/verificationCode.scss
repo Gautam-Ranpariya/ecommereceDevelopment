@@ -47,12 +47,13 @@
 
     .container {
         height: 100%;
+        position: relative;
+        z-index: 99;
+        overflow-y: hidden;
 
         .innerVerificationCode {
             @include grid2-centers;
             height: 100%;
-            position: relative;
-            z-index: 999;
 
             @include breakpoint ("max-md") {
                 grid-template-columns: 1fr;

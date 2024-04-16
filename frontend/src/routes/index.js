@@ -6,6 +6,7 @@ import VerificationCode from '../auth/verificationCode';
 import ForgotPassword from '../auth/forgotPassword';
 import ResetPassword from '../auth/resetPassword';
 import Home from '../app/home';
+import Error from '../app/error';
 
 
 export default function RouterComponents() {
@@ -20,6 +21,7 @@ export default function RouterComponents() {
                     <Route path ='/verificationCode' element={<VerificationCode />} />
                     <Route path='/forgotPassword' element={<ForgotPassword />} />
                     <Route path='/resetPassword' element={<ResetPassword />} />
+                    <Route path='/error' element={<Error />} />
                 </Routes>
             </div> 
         </Router>
