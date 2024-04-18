@@ -1,279 +1,206 @@
-@import '../../styles/global.scss';
-
-$base : 0px;
-$xsss : 375px;
-$xss : 540px;
-$xs : 640px;
-$sm : 768px;
-$md : 992px;
-$lg : 1024px;
-$xl : 1280px;
-$xll: 1440px;
+@import "../../styles/global.scss";
 
 .mainLogin {
-    height: 100vh;
-    background-color: var(--theme-bg-white);
-    position: relative;
+  height: 100vh;
+  background-color: var(--theme-bg-white);
+  position: relative;
+  overflow-y: hidden;
 
-    .vectorTop
-    {
-        position: absolute;
-        top: -60px;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background-image: url('../../assets/images/auth-vector-top.png');
-        background-position: top left;
-        background-repeat: no-repeat;
-        display: none;
+  .vectorTop {
+    position: absolute;
+    top: -60px;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url("../../assets/images/auth-vector-top.png");
+    background-position: top left;
+    background-repeat: no-repeat;
+    display: none;
 
-        @media screen and (max-width: $xs) {
-            display: block;
-        }
+    @include breakpoint("max-md") {
+      display: block;
+    }
+  }
+
+  .vectorBottom {
+    position: absolute;
+    bottom: -10px;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url("../../assets/images/auth-vector-bottom.png");
+    background-position: bottom right;
+    background-repeat: no-repeat;
+    display: none;
+
+    @include breakpoint("max-md") {
+      display: block;
     }
 
-    .vectorBottom
-    {
-        position: absolute;
-        bottom: -10px;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background-image: url('../../assets/images/auth-vector-bottom.png');
-        background-position: bottom right;
-        background-repeat: no-repeat;
-        display: none;
-
-        @media screen and (max-width: $xs) {
-            display: block;
-        }
+    @include breakpoint("max-sm") {
+      bottom: -30px;
     }
+  }
 
-    .container {
-        height: 100%;
+  .container {
+    height: 100%;
 
-        .innerLogin {
-            @include grid2-centers;
-            height: 100%;
-            position: relative;
-            z-index: 999;
+    .innerLogin {
+      @include grid2-centers;
+      height: 100%;
+      position: relative;
+      z-index: 999;
 
-            @media screen and (max--width : $lg) {
-                gap: 20px;
+      @include breakpoint("max-md") {
+        grid-template-columns: 1fr;
+      }
+
+      .imagePart {
+        @include flex-centers;
+        width: 100%;
+        height: 100vh;
+
+        @include breakpoint("max-md") {
+          padding: 0;
+          height: 100%;
+          align-items: end;
+        }
+
+        .auth {
+          height: 100%;
+          object-fit: cover;
+
+          @include breakpoint("max-md") {
+            display: none;
+          }
+        }
+        .auth-login {
+          max-height: 150px;
+          display: none;
+
+          @include breakpoint("max-md") {
+            display: block;
+          }
+        }
+      }
+
+      .loginPart {
+        @include flex-centers;
+        width: 100%;
+
+        .loginForm {
+          width: 100%;
+          @include flex-col;
+          max-width: 387px;
+          height: auto;
+          padding: 0 5px;
+          gap: 15px;
+
+          @include breakpoint("max-md") {
+            max-width: 80%;
+            gap: 10px;
+          }
+
+          .loginHeadingPart {
+            padding: 2px 0;
+
+            @include breakpoint("max-md") {
+              padding: 0;
             }
 
-            @media screen and (max-width : $md) {
-                gap: 10px;
+            .loginHeading {
+              @include font-karma-auth-heading-bold-700;
+              color: var(--theme-auth-heading-text);
+              text-align: left;
+              width: 100%;
+              padding: 10px 0;
+
+              @include breakpoint("max-md") {
+                @include font-kaisei-harunoUmi-bold-700;
+                font-size: 20px;
+                line-height: 20px;
+              }
+            }
+            .headingDescription {
+              @include font-kanit-auth-subHeading-bold-400;
+              color: var(--theme-auth-subHeading-text);
+            }
+          }
+
+          .forgotPasswordPart {
+            .forgotPassword {
+              @include font-kanit-bold-400;
+              text-align: right;
+
+              .forgot {
+                color: var(--theme-auth-options-gray-text);
+
+                @include breakpoint("max-xs") {
+                  color: var(--theme-auth-options-dark-gray-text);
+                }
+              }
+            }
+          }
+
+          .signInWithPart {
+            @include flex-centers;
+            padding: 5px 0;
+
+            .vector {
+              height: 2px;
+              width: 100%;
+              background-color: var(--theme-auth-vector-bg-light-gray);
             }
 
-            @media screen and (max-width : $xs ){
-                grid-template-columns: 1fr;
-                gap: 2px;
+            .otherOption {
+              width: 100%;
+              padding: 2px;
+
+              .signInOption {
+                color: var(--theme-auth-other-options-text);
+                text-align: center;
+                @include font-roboto-400;
+
+                @include breakpoint("max-md") {
+                  font-size: 12px;
+                  @include font-kanit-auth-subHeading-bold-400;
+                  line-height: 23.92px;
+                }
+              }
             }
+          }
+          .loginSocialMediaPart {
+            @include flex-centers;
+            padding: 2px 0;
+            width: 145px;
+            margin: 0 auto;
+            gap: 5px;
+          }
+          .signupOptionPart {
+            .signupDescription {
+              text-align: center;
+              @include font-kanit-bold-400;
+              color: var(--theme-auth-account-options-gray-text);
 
-            .imagePart {
-                @include flex-centers;
-                width: 100%;
-                height: 100vh;
+              @include breakpoint("max-md") {
+                color: var(--theme-auth-account-options-black-text);
+              }
 
-                @media screen and (max-width : $xs) {
-                    padding: 0;
-                    height: 100%;
-                    align-items: end;
+              .signupLink {
+                color: var(--theme-auth-account-options-link-moderate-text);
+
+                @include breakpoint("max-md") {
+                  color: var(--theme-auth-account-options-link-white-text);
                 }
 
-                .auth {
-                        height: 100%;
-                        object-fit: cover;
-
-                        @media screen and (max-width: $lg) 
-                        {
-                            height: calc(100% - 50px);
-                        }
-
-                        @media screen and (max-width: $md){
-                            height: calc(100% - 100px);
-                        }
-
-                        @media screen and (max-width: $sm){
-                            height: calc(100vh - 120px); 
-                        }
-                        
-                        @media screen and (max-width: $xs) {
-                            display: none;
-                        }
-                    }
-                    .auth-login
-                    {
-                        max-height:150px;
-                        display: none;
-
-                        @media screen and (max-width: $xs) {
-                            display: block;
-                        }
-                    }
-            }
-
-            .loginPart {
-                @include flex-centers;
-                width: 100%;
-
-                .loginForm {
-                    width: 100%;
-                    @include flex-col;
-                    max-width: 387px;
-                    height: auto;
-                    padding: 0 5px;
-                    gap: 15px;
-
-                    @media screen and (max-width: $lg) {
-                        max-width: 320px;
-                    }
-
-                    @media screen and (max-width: $md) {
-                        max-width: 300px;
-                    }
-                    
-                    @media screen and (max-width : $sm) {
-                        max-width: 280px;
-                        gap: 10px;
-                    }
-
-                    
-                    @media screen and (max-width : $xs) {
-                        max-width: 80%;
-                        gap: 8px;
-                    }
-
-                    .loginHeadingPart {
-                        padding: 2px 0;
-
-                        @media screen and (max-width: $md) {
-                            padding: 0;
-                        }
-
-                        .loginHeading {
-                            @include font-karma-auth-heading-bold-700;
-                            color: var(--theme-auth-heading-text);
-                            text-align: left;
-                            width: 100%;
-
-                            @media screen and (max-width : $md) {
-                                font-size: 32px;
-                                line-height: 36px;
-                            }
-
-                            @media screen and (max-width : $sm) {
-                                font-size: 28px;
-                                line-height: 32px;
-                            }
-
-                            @media screen and (max-width : $xs) {
-                                @include font-kaisei-harunoUmi-bold-700;
-                                font-size: 20px;
-                                line-height: 36px;
-                            }
-
-                        }
-
-                        .headingDescription {
-                            @include font-kanit-auth-subHeading-bold-400;
-                            color: var(--theme-auth-subHeading-text);
-
-                            @media screen and (max-width : $xs) {
-                                @include font-kanit-bold-400;
-                                line-height: 12px;
-                                font-size: 12px;
-                            }
-                        }
-                    }
-
-                    .forgotPasswordPart {
-                        .forgotPassword {
-                            @include font-kanit-bold-400;
-                            text-align: right;
-
-                            .forgot {
-                                color: var(--theme-auth-options-gray-text);
-
-                                @media screen and (max-width : $xs) {
-                                    color: var(--theme-auth-options-dark-gray-text);
-                                }
-                            }
-                        }
-                    }
-
-                    .signInWithPart {
-                        @include flex-centers;
-                        padding: 10px 0;
-
-                        @media screen and (max-width: $sm) {
-                            padding: 5px;
-                        }
-
-                        .vector {
-                            height: 2px;
-                            width: 100%;
-                            background-color: var(--theme-auth-vector-bg-light-gray);
-
-                        }
-
-                        .otherOption {
-                            width: 100%;
-                            padding: 2px;
-
-                            .signInOption {
-                                color: var(--theme-auth-other-options-text);
-                                text-align: center;
-                                @include font-roboto-400;
-
-                                @media screen and (max-width : $sm) {
-                                    font-size: 12px;
-                                }
-
-                                @media screen and (max-width : $xs) {
-                                    @include font-kanit-auth-subHeading-bold-400;
-                                    line-height: 23.92px;
-                                }
-                            }
-                        }
-                    }
-                    .signInOptionPart
-                    {
-                        @include flex-centers;
-                        padding: 2px 0;
-                        width: 145px;
-                        margin: 0 auto;
-                        gap: 5px;
-                    }
-                    .signupOptionPart
-                    {
-                        .signupDescription
-                        {
-                            text-align: center;
-                            @include font-kanit-bold-400;
-                            color: var( --theme-auth-account-options-gray-text);
-
-                            @media screen and (max-width: $sm) {
-                                font-size: 15px;
-                            }
-
-                            @media screen and (max-width: $xs) {
-                                color: var(--theme-auth-account-options-black-text);
-                            }
-
-                            .signupLink
-                            {
-                                color: var( --theme-auth-account-options-link-moderate-text);
-
-                                @media screen and (max-width : $xs) {
-                                    color: var(--theme-auth-account-options-link-white-text);
-                                }
-                            }
-                        }
-                    }
+                @media screen and (min-width: 920px) {
+                  color: var(--theme-auth-account-options-link-moderate-text);
                 }
+              }
             }
+          }
         }
+      }
     }
+  }
 }
