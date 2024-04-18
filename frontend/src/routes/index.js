@@ -1,19 +1,22 @@
-import React  from 'react';
+import React , { Suspense , lazy}  from 'react';
 import { BrowserRouter as Router , Routes , Route } from 'react-router-dom';
-import Login from '../auth/login';
-import SignUp from '../auth/signup';
-import VerificationCode from '../auth/verificationCode';
-import ForgotPassword from '../auth/forgotPassword';
-import ResetPassword from '../auth/resetPassword';
-import Home from '../app/home';
-import Error from '../app/error';
+import Loader from '../shared/common/loader';
+
+const Home = lazy(() => import('../app/home'));
+const Error = lazy(() => import('../app/error/'));
+const Login = lazy(() => import('../auth/login'));
+const SignUp = lazy(() => import('../auth/signup'));
+const VerificationCode = lazy(() => import('../auth/verificationCode'));
+const ForgotPassword = lazy(() => import('../auth/forgotPassword'));
+const ResetPassword = lazy(() => import('../auth/resetPassword'));
+
 
 
 export default function RouterComponents() {
   return (
     <div>
         <Router>
-            <div>
+            <Suspense fallback={<Loader />}>
                 <Routes>
                     <Route path='/' element={<Home />} />
                     <Route path='/login' element={<Login />} />
@@ -23,7 +26,7 @@ export default function RouterComponents() {
                     <Route path='/resetPassword' element={<ResetPassword />} />
                     <Route path='/error' element={<Error />} />
                 </Routes>
-            </div> 
+            </Suspense> 
         </Router>
     </div>
   )

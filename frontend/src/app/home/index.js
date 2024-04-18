@@ -35,8 +35,8 @@ export default function Home() {
                 <img src={logo} alt="Online Shop" className='logoImage' />
               </div>
               <div className="headerItems">
-                <ModerateButton text="Login" />
-                <ModerateOutlineButton text="Sign up" />
+                <ModerateButton text="Login" onClick={() => handleClick('/login')} />
+                <ModerateOutlineButton text="Sign up" onClick={() => handleClick('/signup')} />
               </div>
             </div>
           </div>
@@ -45,7 +45,7 @@ export default function Home() {
               <div className="innerContentPart">
                 <h3 className='mainHomeHeading'>Online shopping</h3>
                 <p className='homeHeadingDescription'>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
-                <ModerateButton text="Get Started" />
+                <ModerateButton text="Get Started" onClick={() => handleClick('/login')} />
               </div>
             </div>
             <div className="homeImagePart">
