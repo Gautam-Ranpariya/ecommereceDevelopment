@@ -24,7 +24,7 @@ export default function RouterComponents() {
                     <Route path ='/verificationCode' element={<VerificationCode />} />
                     <Route path='/forgotPassword' element={<ForgotPassword />} />
                     <Route path='/resetPassword' element={<ResetPassword />} />
-                    <Route path='/error' element={<Error />} />
+                    <Route path='*' element={<Error />} />
                 </Routes>
             </Suspense> 
         </Router>
