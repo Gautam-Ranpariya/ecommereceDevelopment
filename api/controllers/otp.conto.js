@@ -23,27 +23,22 @@ const sendOtp = async (req, res) => {
           </div>
         </div>
         </div>`
-        user = await otpModel.findOne({ email: email })
-        console.log("🚀 ~ sendOtp ~ user:", user)
-        console.log(otp, email, "*******");
+        let user = await otpModel.findOne({ email: email })
         if (user) {
             user = await otpModel.findByIdAndUpdate({ _id: user._id }, { $set: { otp: otp } }, { new: true })
             await sendEmail({ email, otp, html })
-            console.log(user,"********");
             return res.status(200).json({
-                user
+               msg : `sent otp :- ${user.email}`
             })
         }
-
-        const newUser = await otpModel.create({ email: email, otp: otp })
-        
+         user = await otpModel.create({ email: email, otp: otp })
         await sendEmail({ email, otp, html })
-        console.log(newUser,"********");
         return res.status(200).json({
-            newUser
+            msg : `sent otp :- ${user.email}`
         })
     } catch (error) {
-        return res.json({
+        console.log("error :-- send otp catch --",error);
+        return res.status(500).json({
             msg: "otp api faild",
             error
         })
@@ -51,7 +46,7 @@ const sendOtp = async (req, res) => {
 
 }
 //varified
-const varifiedOtp = async (req, res) => {
+const verified = async (req, res) => {
     try {
         const { email, otp } = req.body
         console.log(email,otp  );
@@ -64,16 +59,17 @@ const varifiedOtp = async (req, res) => {
         if (user.otp != otp) {
             return res.status(404).json({
                 msg: "wrong otp",
-                varifiedOtp: false
+                verified: false
             })
         }
-        return res.status(404).json({
-            msg: "user is varifiedOtp",
-            varifiedOtp: true
+        return res.status(200).json({
+            msg: "user is verified",
+            verified: true
         })
     } catch (error) {
-        return res.json({
-            msg: "varifiedOtp api faild",
+        console.log("error :-- verified otp catch --",error);
+        return res.status(400).json({
+            msg: "verified api faild",
             error
         })
     }
@@ -83,5 +79,5 @@ const varifiedOtp = async (req, res) => {
 
 module.exports = {
     sendOtp,
-    varifiedOtp
+    verified
 }
