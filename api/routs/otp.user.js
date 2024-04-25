@@ -6,7 +6,7 @@ const {sendOtpvalidation,varifiedvalidation}=require("../validation/otpSchema.ve
 
 //otp gen
 routs.post('/send',sendOtpvalidation,otpController.sendOtp)
-routs.post('/varified',varifiedvalidation,otpController.varifiedOtp)
+routs.post('/varified',varifiedvalidation,otpController.verified)
 
 
 

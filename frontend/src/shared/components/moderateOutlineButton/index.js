@@ -5,7 +5,7 @@ export default function ModerateOutlineButton(props) {
     const { text , onClick} = props;
   return (
     <div className='moderateOutlineButtonMain'>
-      <button className='moderateOutlineBtn' onClick={onClick}>{text}</button>
+      <button className='moderateOutlineBtn' aria-label={text} onClick={onClick}>{text}</button>
     </div>
   )
 }

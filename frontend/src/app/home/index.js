@@ -32,7 +32,7 @@ export default function Home() {
           <div className="homeHeader">
             <div className="container">
               <div className="logo">
-                <img src={logo} alt="Online Shop" className='logoImage' />
+                <img  src={logo} alt="Online Shop" className='logoImage' />
               </div>
               <div className="headerItems">
                 <ModerateButton text="Login" onClick={() => handleClick('/login')} />

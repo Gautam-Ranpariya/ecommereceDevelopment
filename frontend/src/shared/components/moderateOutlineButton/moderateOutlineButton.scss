@@ -4,6 +4,7 @@
 .moderateOutlineButtonMain
 {
     width: 100%;
+    border-radius: 30px;
     
     .moderateOutlineBtn {
         width: 100%;
@@ -17,7 +18,6 @@
         @include font-kanit-auth-subHeading-bold-400;
         cursor: pointer;
 
-        
     @include breakpoint ("max-md") {
         padding: 10px;
         font-size: 18px; 

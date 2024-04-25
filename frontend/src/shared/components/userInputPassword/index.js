@@ -5,7 +5,7 @@ import closeEye from '../../../assets/icons/closeEye.svg';
 
 
 export default function UserInputPassword(props) {
-  const { name ,placeholder} = props;
+  const { name ,placeholder , onChange, value} = props;
   const [togglePasswordType, setTogglePasswordType] = useState(true);
 
   const handleClick = () => {
@@ -15,7 +15,7 @@ export default function UserInputPassword(props) {
   return (
     <div className='loginPasswordPart'>
        <img src={togglePasswordType === true ? closeEye : openEye} alt="eye-icon" className='eyeIcon' onClick={() => handleClick()} />
-      <input type={togglePasswordType === true ? 'password' : 'text'} name={name} className='userPassword' placeholder={placeholder}   />
+      <input type={togglePasswordType === true ? 'password' : 'text'} name={name} className='userPassword' placeholder={placeholder} onChange={onChange} value={value}  />
     </div>
   )
 }

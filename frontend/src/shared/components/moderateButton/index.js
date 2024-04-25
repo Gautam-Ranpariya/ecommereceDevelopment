@@ -5,7 +5,7 @@ export default function ModerateButton(props) {
   const { text, onClick } = props;
   return (
     <div className='moderateButtonMain'>
-      <button className='moderateBtn' onClick={onClick}>{text}</button>
+      <button className='moderateBtn' aria-label={text} onClick={onClick} >{text}</button>
     </div>
   )
 }
