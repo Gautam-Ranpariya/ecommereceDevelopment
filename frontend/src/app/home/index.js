@@ -21,10 +21,10 @@ export default function Home() {
     <>
       <div className='mainHome'>
         <div className="homeTopVector">
-          <img src={vectorTop} alt="vector top" className='topVectorImageHome' />
+          <img src={vectorTop} alt="vector top" className='topVectorImageHome' loading='lazy' />
         </div>
         <div className="homeBottomVector">
-          <img src={vectorBottom} alt="vector bottom" className='bottomVectorImageHome' />
+          <img src={vectorBottom} alt="vector bottom" className='bottomVectorImageHome' loading='lazy' />
         </div>
         <div className="homeMobileTopVector"></div>
         <div className="homeMobilebottomVector"></div>
@@ -32,7 +32,7 @@ export default function Home() {
           <div className="homeHeader">
             <div className="container">
               <div className="logo">
-                <img  src={logo} alt="Online Shop" className='logoImage' />
+                <img  src={logo} alt="Online Shop" className='logoImage' loading='lazy' />
               </div>
               <div className="headerItems">
                 <ModerateButton text="Login" onClick={() => handleClick('/login')} />
@@ -51,7 +51,7 @@ export default function Home() {
             <div className="homeImagePart">
               <div className="homeBannerImage">
               </div>
-              <img src={homeShopping} alt="home - shopping" className='homeShoppingGirl' />
+              <img src={homeShopping} alt="home - shopping" className='homeShoppingGirl' loading='lazy' />
             </div>
             <div className="homeMobileContentPart">
               <h2 className='homeMobileHeading'>Welcome</h2>
@@ -59,7 +59,7 @@ export default function Home() {
             </div>
             <div className="homeMobileImagePart">
               <div className="homeMobileBannerImage"></div>
-              <img src={homeShopping} alt="home - shopping" className='homeMobileShoppingGirl' />
+              <img src={homeShopping} alt="home - shopping" className='homeMobileShoppingGirl' loading='lazy' />
             </div>
             <div className="homeMobileAuthButtons">
               <ModerateButton text="Login" onClick={() => handleClick('/login')} />

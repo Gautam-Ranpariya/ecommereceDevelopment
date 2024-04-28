@@ -14,7 +14,7 @@ export default function UserInputPassword(props) {
 
   return (
     <div className='loginPasswordPart'>
-       <img src={togglePasswordType === true ? closeEye : openEye} alt="eye-icon" className='eyeIcon' onClick={() => handleClick()} />
+       <img src={togglePasswordType === true ? closeEye : openEye} alt="eye-icon" className='eyeIcon' onClick={() => handleClick()} loading='lazy' />
       <input type={togglePasswordType === true ? 'password' : 'text'} name={name} className='userPassword' placeholder={placeholder} onChange={onChange} value={value}  />
     </div>
   )

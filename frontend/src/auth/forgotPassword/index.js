@@ -22,8 +22,8 @@ export default function ForgotPassword() {
           <div className="container">
             <div className="innerForgotPassword">
               <div className="imagePart">
-                <img src={AuthDesktop} alt="authDesktopImage" className='auth' />
-                <img src={authForgotPassword} alt="auth-forgotPassword" className='auth-forgotPassword' />
+                <img src={AuthDesktop} alt="authDesktopImage" className='auth' loading='lazy' />
+                <img src={authForgotPassword} alt="auth-forgotPassword" className='auth-forgotPassword' loading='lazy' />
               </div>
               <div className="forgotPasswordPart">
                 <div className="verificationForm">

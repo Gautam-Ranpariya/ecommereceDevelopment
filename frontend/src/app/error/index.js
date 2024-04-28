@@ -12,7 +12,7 @@ export default function Error() {
                         <h4 className='errorStutasText'>not found</h4>
                     </div>
                     <div className="errorImagePart">
-                        <img src={pageNotFound} alt="Page not Found" className='pageNotFound' />
+                        <img src={pageNotFound} alt="Page not Found" className='pageNotFound' loading='lazy' />
                     </div>
                 </div>
             </div>

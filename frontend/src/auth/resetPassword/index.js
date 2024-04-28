@@ -19,8 +19,8 @@ export default function ResetPassword() {
           <div className="container">
             <div className="innerResetPassword">
               <div className="imagePart">
-                <img src={AuthDesktop} alt="authDesktopImage" className='auth' />
-                <img src={authResetPassword} alt="auth-resetPassword" className='auth-resetPassword' />
+                <img src={AuthDesktop} alt="authDesktopImage" className='auth' loading='lazy' />
+                <img src={authResetPassword} alt="auth-resetPassword" className='auth-resetPassword' loading='lazy' />
               </div>
               <div className="resetPasswordPart">
                 <div className="verificationForm">

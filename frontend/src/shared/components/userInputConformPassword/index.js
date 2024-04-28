@@ -14,7 +14,7 @@ export default function UserInputConformPassword(props) {
   return (
     <div className='loginConformPasswordPart'>
       <img src={lock} alt="lock-icon" className='lockIcon' />
-      <input type='password' name={name} className='userConformPassword' placeholder={placeholder} onChange={onChange} value={value} />
+      <input type='password' name={name} className='userConformPassword' placeholder={placeholder} onChange={onChange} value={value} loading='lazy' />
     </div>
   )
 }

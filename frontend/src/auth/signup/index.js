@@ -1,7 +1,6 @@
-import React, { useState } from 'react';
-import { useDispatch} from 'react-redux'
+import React, { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import './signup.scss';
-
 import AuthDesktop from '../../assets/images/authDesktop.png';
 import UserInputEmail from '../../shared/components/userInputEmail';
 import UserInputPassword from '../../shared/components/userInputPassword';
@@ -13,45 +12,64 @@ import googleIcon from '../../assets/icons/google.svg';
 import linkedInIcon from '../../assets/icons/linkedIn.svg';
 import authSignUp from '../../assets/images/auth-signUp.png';
 import UserInputConformPassword from '../../shared/components/userInputConformPassword';
-// import ValidateUserRegistration from '../../validation/SignUpValidation';
-import { alreadyUser } from '../../redux/userRegistrationSclice';
+import { alreadyUser, sendOtpMail, setNewUserData } from '../../redux/userRegistrationSclice';
 
 export default function SignUp() {
-  
-  const [newUser , setNewUser] = useState({
-    email : "",
-    password : "",
-    conformPassword : "",
+
+
+  const [newUser, setNewUser] = useState({
+    email: "",
+    password: "",
+    conformPassword: "",
   })
 
   const dispatch = useDispatch();
+  
 
   const handleChange = (e) => {
-    const { name , value } = e.target ;
-    const  data = {
+    const { name, value } = e.target;
+    const data = {
       ...newUser,
-      [name] : value,
+      [name]: value,
     }
-    setNewUser(data);
+    setNewUser(data); 
   };
-
-
-  const validNewUser = (email) => {
-    dispatch(alreadyUser(email)).then((res) => {
-      console.log(res, "%%%%%%%%%%res");
-    })
-    .catch((err) => {
-      console.log("*******",err);
-    });
-  }
-
-  const handleClick = (e) => {
-    // if (ValidateUserRegistration(newUser)) {  
-    // }
-    validNewUser(newUser.email)
+  
+  
+  // submit user data :)
+  const handleClick = () => {
+    dispatch(setNewUserData(newUser));
   };
+  
+  // check user exist or not :)
+  const selectUserData = useSelector(stat => stat.userRegistration.user)
+  useEffect(() => {
+    if (selectUserData) {
+      console.log('Checking email', selectUserData.email);
+      dispatch(alreadyUser(selectUserData.email))
+    }
+  },[selectUserData.email]);
 
 
+  // send email to new user :)
+  const isAlreadyUserFound = useSelector(stat => stat.userRegistration.isAlreadyUser)
+  useEffect(() => {
+    if (!isAlreadyUserFound) {
+      console.log('Is Already User', isAlreadyUserFound);
+      dispatch(sendOtpMail(selectUserData.email));
+    }
+  },[isAlreadyUserFound]);
+
+
+  // get user registration mail response :)
+  const isMailSent = useSelector(stat => stat.userRegistration.isMail)
+  useEffect(() => {
+    if (isMailSent) {
+      console.log('Is Mail Sent', isMailSent);
+    }
+  },[isMailSent]);
+
+  
   return (
     <>
       <div>
@@ -61,8 +79,8 @@ export default function SignUp() {
           <div className="container">
             <div className="innerSignUp">
               <div className="imagePart">
-                <img src={AuthDesktop} alt="authDesktopImage" className='auth' />
-                <img src={authSignUp} alt="auth-signUp" className='auth-signUp' />
+                <img src={AuthDesktop} alt="authDesktopImage" className='auth' loading='lazy' />
+                <img src={authSignUp} alt="auth-signUp" className='auth-signUp' loading='lazy' />
               </div>
               <div className="signUpPart">
                 <div className="signUpForm">

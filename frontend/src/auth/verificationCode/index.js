@@ -17,8 +17,8 @@ export default function VerificationCode() {
           <div className="container">
             <div className="innerVerificationCode">
               <div className="imagePart">
-                <img src={AuthDesktop} alt="authDesktopImage" className='auth' />
-                <img src={authVerificationCode} alt="auth-verificationCode" className='auth-verificationCode' />
+                <img src={AuthDesktop} alt="authDesktopImage" className='auth' loading='lazy' />
+                <img src={authVerificationCode} alt="auth-verificationCode" className='auth-verificationCode' loading='lazy' />
               </div>
               <div className="verificationCodePart">
                 <div className="verificationForm">

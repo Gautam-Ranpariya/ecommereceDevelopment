@@ -7,7 +7,7 @@ export default function UserInputEmail(props) {
   return (
     <div className='loginEmailPart'>
       <img src={mail} alt="mail-icon" className='mailIcon' />
-      <input type='email' name={name} className='userEmail' placeholder={placeholder} onChange={onChange} value={value} />
+      <input type='email' name={name} className='userEmail' placeholder={placeholder} onChange={onChange} value={value} loading='lazy' />
     </div>
   )
 }

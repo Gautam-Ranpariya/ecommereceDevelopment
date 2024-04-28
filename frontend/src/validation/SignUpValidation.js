@@ -25,11 +25,11 @@ export default function ValidateUserRegistration(data) {
             toast.error("Please Enter Strong Password !!")
             return isValid;
       }
-      else if ((data.cpassword === "") || (data.cpassword.length === 0)) {
+      else if ((data.conformPassword === "") || (data.conformPassword.length === 0)) {
             toast.error("Please Enter Your Conform Password")
             return isValid;
       }
-      else if (data.password !== data.cpassword) {
+      else if (data.password !== data.conformPassword) {
             toast.error("Please Enter Same Password")
             return isValid;
       }

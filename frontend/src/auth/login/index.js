@@ -24,8 +24,8 @@ export default function Login() {
           <div className="container">
             <div className="innerLogin">
               <div className="imagePart">
-                <img src={AuthDesktop} alt="authDesktopImage" className='auth' />
-                <img src={authLogin} alt="auth-login" className='auth-login' />
+                <img src={AuthDesktop} alt="authDesktopImage" className='auth' loading='lazy' />
+                <img src={authLogin} alt="auth-login" className='auth-login' loading='lazy' />
               </div>
               <div className="loginPart">
                 <div className="loginForm">

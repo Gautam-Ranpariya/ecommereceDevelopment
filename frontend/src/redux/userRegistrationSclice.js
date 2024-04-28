@@ -4,63 +4,94 @@ import Instance from '../axios/axiosInstance';
 
 const initialUser = {
     user: JSON.parse(localStorage.getItem('user')) || {},
-    userResponse: [],
-    isNewUser: false,
-    status: 'idel'
-    // isAuthenticated: false,
+    isAlreadyUser : 'idel',
+    alreadyUserStatus : 'idel',
+    sendMailStatus : 'idel',
+    isMail : {},
 }
 
+
+// check already user :)
 export const alreadyUser = createAsyncThunk(
-    'checkAlreadyUser',
-    async initialUser => {
+    'user/alreadyUser',
+    async (initialUserData) => {
+       const body = {
+            email : initialUserData,
+        }
         try {
-            const response = await Instance.post('user/already-user', initialUser)
+            const response = await Instance.post('user/already-user',body)
             if (response.status === 200) {
-                console.log("user already response $$$$$$$$$$", response.data);
+                console.log("user already response $$$$$$$$$$",response.data);
                 return response.data
             }
         } catch (error) {
-            console.log(error)
+            console.log(error.response.data.message)
         }
     }
 )
 
 
+// send mail thunk :)
+export const sendOtpMail = createAsyncThunk(
+    'user/sendOtpMail',
+    async initialUserMail => {
+        const body = {
+            email : initialUserMail
+        }
+        try {
+            const response = await Instance.post('otp/send',body)
+            if (response.status === 200) {
+                console.log("user initial mail $$$$$$",response.data);
+                return response.data
+            }
+        } catch (error) {
+            console.log("send mail error",error.response.data.message)
+        }
+    }
+)
+
+
+// ******************************** User Registration Sclice ********************************
 export const userRegSclice = createSlice({
     name: 'user',
     initialState: initialUser,
     reducers: {
-        setNewUser: (state, action) => {
+        setNewUserData: (state, action) => {
             state.user = action.payload;
+            localStorage.setItem('user',JSON.stringify(state.user));
         }
     },
     extraReducers: (builder) => {
         builder
+            // send mail builder :)
             .addCase(alreadyUser.pending, (state, action) => {
-                state.userResponse.push(action.payload)
-                state.status = 'loading'
-            })
+                state.alreadyUserStatus = 'pending';
+                // state.isAlreadyUser = 'idel';
 
+            })
             .addCase(alreadyUser.fulfilled, (state, action) => {
-                state.userResponse.push(action.payload)
-                state.status = 'succeeded'
+                state.alreadyUserStatus = 'fullfilled';
+                state.isAlreadyUser = action.payload.alreadyUser;
+                
+            })
+            .addCase(alreadyUser.rejected, (state, action) => {
+                state.alreadyUserStatus = 'rejected';
+                state.isAlreadyUser = 'idel';
             })
 
-            .addCase(alreadyUser.rejected, (state, action) => {
-                state.userResponse.push(action.payload)
-                state.status = 'failed'
+            // send mail builder :)
+            .addCase(sendOtpMail.pending, (state, action) => {
+                state.sendMailStatus = 'pending';
+            })
+            .addCase(sendOtpMail.fulfilled, (state, action) => {
+                state.sendMailStatus = 'fullfilled';
+                state.isMail = action.payload;
+            })
+            .addCase(sendOtpMail.rejected, (state, action) => {
+                state.sendMailStatus = 'rejected';
             })
     }
 })
 
-// signUpUser: (state, action) => {
-//     state.user = action.payload;
-//     state.isAuthenticated = true;
-// },
-// logout: (state) => {
-//     state.user = null;
-//     state.isAuthenticated = false;
-// }
-
-
+export const {setNewUserData} = userRegSclice.actions;
 export default userRegSclice.reducer;

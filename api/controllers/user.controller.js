@@ -29,13 +29,13 @@ const alreadyuser = async (req, res) => {
             return res.status(200).json({
                 msg: "already user",
                 user : user.username,
-                newUser: false
+                alreadyUser: false
             })
         }
         return res.status(200).json({
             msg: "new user",
             user : user.username,
-            newUser: true
+            alreadyUser: true
         })
     } catch (error) {
         return res.status(500).json({
