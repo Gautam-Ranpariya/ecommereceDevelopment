@@ -1,6 +1,5 @@
 import React from 'react'
 import './verificationCode.scss';
-
 import AuthDesktop from '../../assets/images/authDesktop.png';
 import ModerateButton from '../../shared/components/moderateButton';
 import authVerificationCode from '../../assets/images/auth-verificationCode.png';

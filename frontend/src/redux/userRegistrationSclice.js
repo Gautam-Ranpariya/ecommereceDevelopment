@@ -4,10 +4,6 @@ import Instance from '../axios/axiosInstance';
 
 const initialUser = {
     user: JSON.parse(localStorage.getItem('user')) || {},
-    isAlreadyUser : 'idel',
-    alreadyUserStatus : 'idel',
-    sendMailStatus : 'idel',
-    isMail : {},
 }
 
 
@@ -21,7 +17,6 @@ export const alreadyUser = createAsyncThunk(
         try {
             const response = await Instance.post('user/already-user',body)
             if (response.status === 200) {
-                console.log("user already response $$$$$$$$$$",response.data);
                 return response.data
             }
         } catch (error) {
@@ -41,7 +36,6 @@ export const sendOtpMail = createAsyncThunk(
         try {
             const response = await Instance.post('otp/send',body)
             if (response.status === 200) {
-                console.log("user initial mail $$$$$$",response.data);
                 return response.data
             }
         } catch (error) {
@@ -63,7 +57,6 @@ export const userRegSclice = createSlice({
     },
     extraReducers: (builder) => {
         builder
-            // send mail builder :)
             .addCase(alreadyUser.pending, (state, action) => {
                 state.alreadyUserStatus = 'pending';
                 // state.isAlreadyUser = 'idel';
@@ -72,7 +65,6 @@ export const userRegSclice = createSlice({
             .addCase(alreadyUser.fulfilled, (state, action) => {
                 state.alreadyUserStatus = 'fullfilled';
                 state.isAlreadyUser = action.payload.alreadyUser;
-                
             })
             .addCase(alreadyUser.rejected, (state, action) => {
                 state.alreadyUserStatus = 'rejected';

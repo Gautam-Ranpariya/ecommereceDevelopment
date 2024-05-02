@@ -17,12 +17,6 @@ import { alreadyUser, sendOtpMail, setNewUserData } from '../../redux/userRegist
 export default function SignUp() {
 
 
-  const [newUser, setNewUser] = useState({
-    email: "",
-    password: "",
-    conformPassword: "",
-  })
-
   const dispatch = useDispatch();
   
 
@@ -38,38 +32,14 @@ export default function SignUp() {
   
   // submit user data :)
   const handleClick = () => {
-    dispatch(setNewUserData(newUser));
-  };
-  
-  // check user exist or not :)
-  const selectUserData = useSelector(stat => stat.userRegistration.user)
-  useEffect(() => {
-    if (selectUserData) {
-      console.log('Checking email', selectUserData.email);
-      dispatch(alreadyUser(selectUserData.email))
-    }
-  },[selectUserData.email]);
+    const userData = dispatch(setNewUserData(newUser))
+    if (userData) {
+      const newUserEmail = userData.payload.email
+      dispatch(alreadyUser(newUserEmail))
+  }
 
 
-  // send email to new user :)
-  const isAlreadyUserFound = useSelector(stat => stat.userRegistration.isAlreadyUser)
-  useEffect(() => {
-    if (!isAlreadyUserFound) {
-      console.log('Is Already User', isAlreadyUserFound);
-      dispatch(sendOtpMail(selectUserData.email));
-    }
-  },[isAlreadyUserFound]);
 
-
-  // get user registration mail response :)
-  const isMailSent = useSelector(stat => stat.userRegistration.isMail)
-  useEffect(() => {
-    if (isMailSent) {
-      console.log('Is Mail Sent', isMailSent);
-    }
-  },[isMailSent]);
-
-  
   return (
     <>
       <div>
