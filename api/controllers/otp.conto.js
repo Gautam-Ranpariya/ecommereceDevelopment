@@ -23,18 +23,23 @@ const sendOtp = async (req, res) => {
           </div>
         </div>
         </div>`
+
+        let body = req.body
+        console.log("🚀 ~ sendOtp ~ body:*********************************88", body)
         let user = await otpModel.findOne({ email: email })
         if (user) {
             user = await otpModel.findByIdAndUpdate({ _id: user._id }, { $set: { otp: otp } }, { new: true })
             await sendEmail({ email, otp, html })
             return res.status(200).json({
-               msg : `sent otp :- ${user.email}`
+               msg : `sent otp :- ${user.email}`,
+               mailSend : true,
             })
         }
          user = await otpModel.create({ email: email, otp: otp })
         await sendEmail({ email, otp, html })
         return res.status(200).json({
-            msg : `sent otp :- ${user.email}`
+            msg : `sent otp :- ${user.email}`,
+            mailSend : true,
         })
     } catch (error) {
         console.log("error :-- send otp catch --",error);

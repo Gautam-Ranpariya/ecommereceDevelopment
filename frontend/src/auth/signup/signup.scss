@@ -103,6 +103,11 @@
                         max-width: 80%;
                         gap: 10px;
                     }
+
+                    @include breakpoint ("max-xxs") {
+                        max-width: 85%;
+                        gap: 8px;
+                    }
                     
                     .signUpHeadingPart {
                         padding: 2px 0;
@@ -177,13 +182,13 @@
                             {
                                 color: var( --theme-auth-account-options-link-moderate-text);
 
-                                @include breakpoint ("max-md") {
+                                @include breakpoint ("max-xs") {
                                     color: var(--theme-auth-account-options-link-white-text);
                                 }
 
-                                @media screen and (min-width :931px) {
-                                    color: var( --theme-auth-account-options-link-moderate-text);
-                                }
+                                // @media screen and (min-width :931px) {
+                                //     color: var( --theme-auth-account-options-link-moderate-text);
+                                // }
 
                             }
                         }

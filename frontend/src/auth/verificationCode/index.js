@@ -3,9 +3,17 @@ import './verificationCode.scss';
 import AuthDesktop from '../../assets/images/authDesktop.png';
 import ModerateButton from '../../shared/components/moderateButton';
 import authVerificationCode from '../../assets/images/auth-verificationCode.png';
+import Otp from './otp/otp';
+import { useSelector } from 'react-redux';
 
 export default function VerificationCode() {
 
+  const {loading} = useSelector(state => state.userRegistration)
+
+  // submit the verification code :)
+  const handleClick = () =>{
+    
+  }
 
   return (
     <>
@@ -26,7 +34,8 @@ export default function VerificationCode() {
                     <p className='verificationCodeHeadingDescription'>Enter the Verification Code we just send you email Addres</p>
                   </div>
                   <div className="verificationCodeBorderVector"></div>
-                  <ModerateButton text="Next" />
+                  <Otp />
+                  <ModerateButton text="Next" onClick={() => handleClick()} disabled={loading} />
                 </div>
               </div>
             </div>

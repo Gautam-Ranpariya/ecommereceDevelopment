@@ -6,10 +6,12 @@ const validate = (schema) => {
             //  if (req.file) {
             //      req.body.profile = req.file.destination + '/' + req.file.filename     
             //  }
+            console.log('frontend body:', req.body);
+            
             const { error, value } = schema.validate(req.body)
 
             if (error) {
-                return res.json({
+                return res.status(403).json({
                     msg : "validaton errror",
                     error: error
                 })
@@ -18,7 +20,7 @@ const validate = (schema) => {
             next()
         }
     } catch (error) {
-        return res.json({
+        return res.status(500).json({
             msg : "validaton faild",
             error: error
         })
