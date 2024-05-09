@@ -24,22 +24,20 @@ const getAllUsers = async (req, res) => {
 const alreadyuser = async (req, res) => {
     try {
         let { email } = req.body
-        let user = await userModel.find({ email: email })
-        if (user) {
+        let user = await userModel.findOne({ email: email })
+        if (!user) {
             return res.status(200).json({
                 msg: "already user",
-                user : user.username,
                 alreadyUser: false
             })
         }
         return res.status(200).json({
             msg: "new user",
-            user : user.username,
             alreadyUser: true
         })
     } catch (error) {
         return res.status(500).json({
-            msg: "already api chek errror",
+            msg: "already api errror",
             error
         })
     }
@@ -49,6 +47,9 @@ const alreadyuser = async (req, res) => {
 const singupUser = async (req, res) => {
     try {
         let { email, username, password, otp, phonenumber } = req.body
+        username = 'demo'
+        console.log('body',req.body, username);
+        
         password = await bcrypt.hash(password, 10)
         let user = await userModel.findOne({ email: email }).lean()
         if (user) {

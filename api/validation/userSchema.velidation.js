@@ -8,9 +8,9 @@ const alreadyuser = Joi.object({
 const singup = Joi.object({
     email : Joi.string().email().required(),
     password : Joi.string().required(),
-    username : Joi.string().required(),
-    otp : Joi.number().required(),
-    phonenumber : Joi.number().required()
+    username : Joi.string(),
+    otp : Joi.number(),
+    phonenumber : Joi.number()
 })
 //login velidation
 const loginvelidation = Joi.object({

@@ -4,19 +4,27 @@ import { authHeader } from "../shared/common/headerAxios/headerAxios";
 
 
 const auth = {
-    // userData states :)
+    
     user: {
         email: "",
         password: "",
         conformPassword: "",
-    },
+    },  // userData states :)
 
-    // api calling states :)
-    loading : 'init',
+    loading: "init",    // api calling states :)
+
+    userOtp: "init",    // verify user :)
+
+    forgotEmail : "",   // forgorPassword :)
+
+    forgotPasswordUser : {
+        resetPassword : "", 
+        reserConfromPassword : "",
+    },   // reset password :)
 }
 
 
-// check already user :)
+// Check already user :)
 export const alreadyUser = createAsyncThunk(
     'auth/alreadyUser',
     async (initialUserData) => {
@@ -34,8 +42,7 @@ export const alreadyUser = createAsyncThunk(
     }
 )
 
-
-// send mail thunk :)
+// Send mail thunk :)
 export const sendOtpMail = createAsyncThunk(
     'auth/sendOtpMail',
     async initialUserMail => {
@@ -53,25 +60,86 @@ export const sendOtpMail = createAsyncThunk(
     }
 )
 
-
-// verify otp thunk :)
-export const verifyOtp = createAsyncThunk(
-    'auth/verifyOtp',
-    async initialUserMailOtp => {
+// Sign up user thunk :)
+export const signUpUser = createAsyncThunk(
+    'auth/signUpUser',
+    async initialUserData => {
         const body = {
-            email: initialUserMailOtp.email,
-            otp : initialUserMailOtp.otp,
+            email: initialUserData.newUser.email,
+            otp: Number(initialUserData.userOtp),
+            password: initialUserData.newUser.password,
         }
         try {
-            const response = await Instance.post('otp/verify', body, { headers : authHeader() })
+            const response = await Instance.post('user/singup', body, { headers: authHeader() })
             if (response.status === 200) {
                 return response.data;
             }
         } catch (error) {
             return error;
         }
-    } 
+    }
 )
+
+// Login user thunk :)
+export const loginUser = createAsyncThunk(
+    'auth/loginUser',
+    async initialUserData => {
+        const body = {
+            email: initialUserData.email,
+            password: initialUserData.password
+        }
+        try {
+            const response = await Instance.post('user/login', body, { headers: authHeader() })
+            if (response.status === 200) {
+                return response.data;
+            }
+        } catch (error) {
+            return error;
+        }
+    }
+)
+
+// Verify user forgot password & otp thunk :)
+export const verifyForgotPasswordData = createAsyncThunk(
+    'auth/verifyForgotPasswordData',
+    async initialUserData => {
+        const body = {
+            email: initialUserData.forgotPassEmail,
+            otp: Number(initialUserData.userOtp),
+        }
+        try {
+            const response = await Instance.post('otp/varified', body, { headers: authHeader() })
+            if (response.status === 200) {
+                return response.data;
+            }
+        } catch (error) {
+            return error;
+        }
+    }
+)
+
+// Forgot password thunk :)
+export const forgorPassword = createAsyncThunk(
+    'auth/forgorPassword',
+    async initialUserData => {
+        const body = {
+            email: initialUserData.email,
+            otp: Number(initialUserData.otp),
+            newPassword :initialUserData.password,
+        }
+        console.log('initialUserData', initialUserData);
+        console.log('body', body);
+        try {
+            const response = await Instance.post('user/forget-password', body, { headers: authHeader() })
+            if (response.status === 200) {
+                return response.data;
+            }
+        } catch (error) {
+            return error;
+        }
+    }
+)
+
 
 
 // ******************************** User Registration Sclice ********************************
@@ -79,16 +147,43 @@ export const userRegSclice = createSlice({
     name: 'auth',
     initialState: auth,
     reducers: {
-        // set new user data :)
+        // Set new user data :)
         setNewUserData: (state, action) => {
             const { name, value } = action.payload;
             state.user[name] = value;
         },
 
-        // reset user data :)
+        // Reset user data :)
         resetUserData(state) {
             state.user = auth.user;
-          },
+        },
+
+        // Login user data :)
+        loginUserData(state, action) {
+            const { name, value } = action.payload;
+            state.user[name] = value;
+        },
+
+        // set otp data :)
+        setUserOtp(state, action) {
+            const {otp} = action.payload;
+            state.userOtp = otp;
+        },
+
+        // forgotPassword Email data :)
+        setForgotPasswordEmailData(state, action){
+            console.log('forgot password email : ', action.payload);
+            state.forgotEmail = action.payload;
+        },
+
+         // forgotPassword resetPassword data :)
+         setForgotPasswordData(state, action){
+            console.log('forgot password email : ', action.payload);
+            const {name , value} = action.payload;
+            state.forgotPasswordUser[name] = value;
+            // state.resetPassword = action.payload;
+        },
+
     },
     extraReducers: (builder) => {
         builder
@@ -116,18 +211,54 @@ export const userRegSclice = createSlice({
             })
 
 
-            // verify otp & mail :)
-            .addCase(verifyOtp.pending, (state, action) => {
+            // sign up user :)
+            .addCase(signUpUser.pending, (state, action) => {
                 state.loading = "pending";
             })
-            .addCase(verifyOtp.fulfilled, (state, action) => {
+            .addCase(signUpUser.fulfilled, (state, action) => {
                 state.loading = "success";
             })
-            .addCase(verifyOtp.rejected, (state, action) => {
+            .addCase(signUpUser.rejected, (state, action) => {
                 state.loading = "failed";
-            });
+            })
+
+
+             // login user :)
+             .addCase(loginUser.pending, (state, action) => {
+                state.loading = "pending";
+            })
+            .addCase(loginUser.fulfilled, (state, action) => {
+                state.loading = "success";
+            })
+            .addCase(loginUser.rejected, (state, action) => {
+                state.loading = "failed";
+            })
+
+
+             // verify forgot password data email & otp :)
+             .addCase(verifyForgotPasswordData.pending, (state, action) => {
+                state.loading = "pending";
+            })
+            .addCase(verifyForgotPasswordData.fulfilled, (state, action) => {
+                state.loading = "success";
+            })
+            .addCase(verifyForgotPasswordData.rejected, (state, action) => {
+                state.loading = "failed";
+            })
+
+
+             // forgot password data :)
+             .addCase(forgorPassword.pending, (state, action) => {
+                state.loading = "pending";
+            })
+            .addCase(forgorPassword.fulfilled, (state, action) => {
+                state.loading = "success";
+            })
+            .addCase(forgorPassword.rejected, (state, action) => {
+                state.loading = "failed";
+            })
     }
 })
 
-export const { setNewUserData , resetUserData } = userRegSclice.actions;
+export const { setNewUserData, resetUserData, loginUserData, setUserOtp, setForgotPasswordEmailData ,setForgotPasswordData } = userRegSclice.actions;
 export default userRegSclice.reducer;

@@ -9,9 +9,40 @@ import SocialMediaButton from '../../shared/components/socialMediaButton';
 import facebookIcon from '../../assets/icons/facebook.svg';
 import googleIcon from '../../assets/icons/google.svg';
 import linkedInIcon from '../../assets/icons/linkedIn.svg';
+import { useDispatch, useSelector } from 'react-redux';
+import { sendOtpMail, setForgotPasswordEmailData } from '../../redux/userRegistrationSclice';
+import { toast } from 'react-toastify';
+import { useNavigate } from 'react-router-dom';
 
 export default function ForgotPassword() {
 
+  const { forgotEmail, loading } = useSelector(state => state.userRegistration);
+
+  const dispatch = useDispatch();
+
+  const navigate = useNavigate();
+
+  const handleChange = (e) => {
+    const { value } = e.target;
+    dispatch(setForgotPasswordEmailData(value))
+  };
+
+  const handleClick = async () => {
+    const email_pattern = /^[\w-]+(\.[\w-]+)*@([\w-]+\.)+[a-zA-Z]{2,7}$/;
+    if ((forgotEmail === '') || (forgotEmail.length === 0)) {
+      toast.error('Please Enter Your Email');
+    }
+    else if (!email_pattern.test(forgotEmail)) {
+      toast.error('Please Enter a Your Correct Email ');
+    }
+    else {
+      await dispatch(sendOtpMail(forgotEmail)).then((res) => {
+        console.log('sendOtpMail',res.payload);
+        localStorage.setItem('forgotPassEmail', JSON.stringify(forgotEmail));
+        navigate('/verificationCode');
+      });
+    }
+  }
 
   return (
     <>
@@ -31,8 +62,8 @@ export default function ForgotPassword() {
                     <p className='forgotPasswordHeading'>Forgot Password</p>
                     <p className='forgotPasswordHeadingDescription'>Enter the email address associated with your accuont</p>
                   </div>
-                  <UserInputEmail name="email" placeholder="Enter your Email" />
-                  <ModerateButton text="Send" />
+                  <UserInputEmail name="email" placeholder="Enter your Email" onChange={(e) => handleChange(e)} value={forgotEmail} />
+                  <ModerateButton text="Send" onClick={(e) => handleClick(e)} disabled={loading === 'pending' ? true : false} />
                   <div className="signInWithPart">
                     <div className='vector'></div>
                     <div className='otherOption'>
