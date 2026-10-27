@@ -54,7 +54,7 @@ const sendOtp = async (req, res) => {
 const varifiedOtp = async (req, res) => {
     try {
         const { email, otp } = req.body
-        console.log(email,otp  );
+        console.log("email: %s otp: %s", email, otp);
         user = await otpModel.findOne({ email: email })
         if (!user) {
             return res.status(404).json({
